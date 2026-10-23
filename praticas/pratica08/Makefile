@@ -1,11 +1,14 @@
-
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -std=c11
+CFLAGS = -Wall -Wextra -std=c99
+TARGET = main
 
-all: main.exe
+all: $(TARGET)
 
-main.exe: main.c agm.c agm.h
-	$(CC) $(CFLAGS) main.c agm.c -o main.exe
+$(TARGET): main.c agm.c agm.h
+	$(CC) $(CFLAGS) main.c agm.c -o $(TARGET)
 
 clean:
-	del /Q main.exe 2>NUL
+	rm -f $(TARGET) main.exe *.o
+
+run: all
+	./$(TARGET)
